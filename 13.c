@@ -28,4 +28,3 @@ int main()
 	hanoi(n,'a','b','c');
 	return 0;
 }
-
