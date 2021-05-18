@@ -9,6 +9,9 @@ typedef struct SListNode
 	struct SListNode* next;
 }SListNode;
 
-SListNode* BuySListNode(SListDataType x);
-void PrintSList(SListNode* phead);
 void SListPushBack(SListNode** pphead, SListDataType x);
+struct SListNode* BuySListNode(SListDataType x);
+void SListShow(SListNode* phead);
+void SListPopBack(SListNode** pphead);
+void SListPushFront(SListNode** pphead, SListDataType x);
+void SListPopFront(SListNode** pphead);
