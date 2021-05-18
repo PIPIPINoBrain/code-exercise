@@ -3,45 +3,92 @@
 #include<stdlib.h>
 #include"SLIST.h"
 
-
-SListNode* BuySListNode(SListDataType x)
+struct SListNode* BuySListNode(SListDataType x)
 {
-	SListNode* newnode = (SListNode*)malloc(sizeof(SListNode));
-	if (newnode == NULL)
+	SListNode* phead = (SListNode*)malloc(sizeof(SListNode));
+	if (phead == NULL)
 	{
-		printf("error toget sapce");
+		printf("fail to get space!!");
 		exit(-1);
 	}
-	newnode->data = x;
-	newnode->next = NULL;
-	return newnode;
-}
-
-void PrintSList(SListNode* phead)
-{
-	SListNode* cur = phead;
-	while (cur != NULL)
-	{
-		printf("%d->", cur->data);;
-		cur = cur->next;
-	}
-
+	phead->data = x;
+	phead->next = NULL;
+	return phead;
 }
 
 void SListPushBack(SListNode** pphead, SListDataType x)
 {
 	SListNode* newnode = BuySListNode(x);
 	if (*pphead == NULL)
-	{
 		*pphead = newnode;
+	else
+	{
+		SListNode* ret = *pphead;
+		while (ret->next != NULL)
+		{
+			ret=ret->next;
+		} 
+		ret->next = BuySListNode(x);
+	}
+}
+
+void SListPopBack(SListNode** pphead)
+{
+	SListNode* tail = *pphead;
+	if (*pphead == NULL)
+		;
+	else if ((*pphead)->next == NULL)
+	{
+		*pphead = NULL;
 	}
 	else
 	{
-		SListNode* tail = *pphead;
-		while (tail->next != NULL)
+		while (tail->next->next != NULL)
 		{
 			tail = tail->next;
 		}
-		tail->next = newnode;
+		free(tail->next->next);
+		tail->next = NULL;
 	}
+}
+
+void SListPushFront(SListNode** pphead, SListDataType x)
+{
+	SListNode* newnode = BuySListNode(x);
+	SListNode* head = *pphead;
+	*pphead = newnode;
+	newnode->next = head;
+}
+
+void SListPopFront(SListNode** pphead)
+{
+	if (*pphead == NULL)
+		;
+	else if ((*pphead)->next == NULL)
+	{
+		*pphead = NULL;
+	}
+	else
+	{
+		*pphead = (*pphead)->next;
+	}
+}
+
+
+void SListShow(SListNode* phead)
+{
+	
+	if (phead == NULL)
+	{
+		printf("NULL");
+	}
+	else
+	{
+		while (phead != NULL)
+			{
+				printf("%d->", phead->data);
+				phead = phead->next;
+			}
+	}
+	
 }
