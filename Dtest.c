@@ -11,7 +11,8 @@ int main()
 	DListPushback(&phead, 2);
 	DListPushback(&phead, 3);
 	DListPushfront(&phead, 3);
-
+	DListPopback(&phead);
+	DListPopfront(&phead);
 	DListShow(phead);
 	return 0;
 }
