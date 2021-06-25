@@ -58,7 +58,7 @@ void DListPopback(DListData** pphead)
 {
 	if (*pphead == NULL)
 		printf("Nothing to pop!");
-	else if ((*pphead)->next = NULL)
+	else if ((*pphead)->next == NULL)
 		printf("NULL");
 	else
 	{
@@ -67,7 +67,24 @@ void DListPopback(DListData** pphead)
 		{
 			ret = ret->next;
 		}
+		free(ret->next);
+		ret->next = NULL;
 
+	}
+}
+
+void DListPopfront(DListData** pphead)
+{
+	if (*pphead == NULL)
+		printf("Nothing to pop!");
+	else if ((*pphead)->next == NULL)
+		printf("NULL");
+	else
+	{
+		DListData* ret = *pphead;
+		*pphead = ret->next;
+		free(ret);
+		ret = NULL;
 	}
 }
 
